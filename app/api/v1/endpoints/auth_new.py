@@ -2,39 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
-from typing import Optional
 import redis
-import json
-
-from app.core.config import settings
-from app.core.database import get_db
-from app.core.security import (
-    create_access_token, 
-    create_refresh_token, 
-    decode_token,
-    get_password_hash,
-    verify_password
-)
-from app.models.user import User
-from app.schemas.auth import UserCreate, UserResponse, Token, UserLogin, RefreshTokenRequest
-from app.crud.user import get_user_by_email, create_user, authenticate_user
-
-router = APIRouter()
-
-# OAuth2 scheme
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
-
-# Redis client for token blacklisting
-redis_client = redis.from_url(settings.REDIS_URL, decode_responses=True)
-
-
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from sqlalchemy.orm import Session
-from datetime import datetime, timedelta
-from typing import Optional
-import redis
-import json
 
 from app.core.config import settings
 from app.core.database import get_db
@@ -42,16 +10,10 @@ from app.core.security import (
     create_access_token,
     create_refresh_token,
     decode_token,
-    get_password_hash,
-    verify_password
+    get_password_hash
 )
 from app.models.user import User
-from app.schemas.auth import (
-    UserCreate, 
-    UserResponse, 
-    Token, 
-    RefreshTokenRequest
-)
+from app.schemas.auth import UserCreate, UserResponse, Token
 from app.crud.user import get_user_by_email, create_user, authenticate_user
 
 router = APIRouter()
@@ -66,7 +28,7 @@ redis_client = redis.from_url(settings.REDIS_URL, decode_responses=True)
 async def is_token_blacklisted(token: str) -> bool:
     """Check if token is blacklisted"""
     try:
-        return await redis_client.exists(f"blacklist:{token}")
+        return bool(redis_client.exists(f"blacklist:{token}"))
     except Exception:
         return False
 
@@ -75,9 +37,9 @@ async def blacklist_token(token: str, expiry: int = None):
     """Add token to blacklist"""
     try:
         if expiry:
-            await redis_client.setex(f"blacklist:{token}", expiry, "true")
+            redis_client.setex(f"blacklist:{token}", expiry, "true")
         else:
-            await redis_client.set(f"blacklist:{token}", "true")
+            redis_client.set(f"blacklist:{token}", "true")
     except Exception:
         pass
 
@@ -174,52 +136,6 @@ async def login(
     }
 
 
-@router.post("/refresh", response_model=Token)
-async def refresh_token(
-    refresh_data: RefreshTokenRequest,
-    db: Session = Depends(get_db)
-):
-    """Refresh access token using refresh token"""
-    # Verify refresh token
-    payload = decode_token(refresh_data.refresh_token)
-    if payload is None or payload.get("type") != "refresh":
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid refresh token"
-        )
-    
-    # Check if token is blacklisted
-    if await is_token_blacklisted(refresh_data.refresh_token):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Refresh token has been revoked"
-        )
-    
-    email = payload.get("sub")
-    user = get_user_by_email(db, email=email)
-    if user is None:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="User not found"
-        )
-    
-    # Create new access token
-    access_token_expires = timedelta(
-        minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES
-    )
-    access_token = create_access_token(
-        subject=user.email,
-        expires_delta=access_token_expires
-    )
-    
-    return {
-        "access_token": access_token,
-        "refresh_token": refresh_data.refresh_token,
-        "token_type": "bearer",
-        "user": user
-    }
-
-
 @router.get("/me", response_model=UserResponse)
 async def read_users_me(current_user: User = Depends(get_current_user)):
     """Get current user profile"""
@@ -242,11 +158,3 @@ async def logout(
             await blacklist_token(token, remaining_ttl)
     
     return {"message": "Successfully logged out"}
-
-
-@router.post("/logout-all")
-async def logout_all(current_user: User = Depends(get_current_user)):
-    """Logout from all devices (invalidate all tokens for user)"""
-    # In a production system, you might want to increment a user version
-    # number in the database and check it in token validation
-    return {"message": "Successfully logged out from all devices"}

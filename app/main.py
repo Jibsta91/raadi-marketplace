@@ -1,25 +1,92 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
+import time
+
+from app.core.config import settings
+from app.core.monitoring import (
+    setup_sentry, 
+    setup_logging, 
+    MetricsMiddleware,
+    get_metrics
+)
+from app.core.cache import cache
+from app.api.v1.api import api_router
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Application lifespan events"""
+    # Startup
+    setup_logging()
+    setup_sentry()
+    await cache.connect()
+    yield
+    # Shutdown
+    await cache.disconnect()
+
 
 app = FastAPI(
     title="Raadi Enterprise Marketplace",
     description="Norwegian enterprise marketplace webapp",
-    version="1.0.0"
+    version=settings.VERSION,
+    lifespan=lifespan
 )
 
-# Add CORS middleware
+# Add security and monitoring middleware
+if settings.ENABLE_METRICS:
+    app.add_middleware(MetricsMiddleware)
+
+# Add CORS middleware with proper configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure this properly for production
+    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
 )
 
+# Add security headers middleware
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    """Add security headers to all responses"""
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    if settings.ENVIRONMENT == "production":
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    return response
+
+# Include API routes
+app.include_router(api_router, prefix=settings.API_V1_STR)
+
 # Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+# Health check endpoint
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for monitoring"""
+    return {
+        "status": "healthy",
+        "version": settings.VERSION,
+        "environment": settings.ENVIRONMENT,
+        "timestamp": int(time.time())
+    }
+
+
+# Metrics endpoint
+@app.get("/metrics")
+async def metrics():
+    """Prometheus metrics endpoint"""
+    if settings.ENABLE_METRICS:
+        return Response(content=get_metrics(), media_type="text/plain")
+    return {"error": "Metrics disabled"}
 
 
 # Serve HTML pages

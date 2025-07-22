@@ -1,9 +1,11 @@
 # FastAPI and web framework
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
+gunicorn==21.2.0
 
 # Database
 sqlalchemy==2.0.23
+asyncpg==0.29.0
 psycopg2-binary==2.9.9
 alembic==1.13.1
 
@@ -19,6 +21,7 @@ python-dotenv==1.0.0
 
 # Redis and caching
 redis==5.0.1
+aioredis==2.0.1
 celery==5.3.4
 
 # Elasticsearch
@@ -45,6 +48,13 @@ Pillow==10.1.0
 # Development and testing
 pytest==7.4.3
 pytest-asyncio==0.21.1
+safety==2.3.5
+bandit==1.7.5
+
+# Production monitoring
+sentry-sdk[fastapi]==1.40.0
+prometheus-client==0.19.0
+structlog==23.2.0
 
 # Other utilities
 python-dateutil==2.8.2

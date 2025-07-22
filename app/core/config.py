@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "your-secret-key-here-change-in-production"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    REFRESH_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
     
     # Database settings
     DATABASE_URL: str = "postgresql://postgres:password@db:5432/raadi"

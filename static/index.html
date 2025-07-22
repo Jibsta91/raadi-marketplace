@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raadi - Norges moderne markedsplass</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="/">
+                        <div class="logo-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <span class="logo-text">Raadi</span>
+                    </a>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <form class="search-form">
+                        <div class="search-bar">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" placeholder="Søk etter annonser, tjenester og mer..." class="search-input">
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- User Actions -->
+                <div class="user-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-bell"></i>
+                        <span>Varsler</span>
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        <span>Ny annonse</span>
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-envelope"></i>
+                        <span>Meldinger</span>
+                    </button>
+                    <button class="btn btn-ghost">
+                        <i class="fas fa-user"></i>
+                        <span>Logg inn</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-links">
+                <a href="/" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Forside</span>
+                </a>
+                <a href="/browse?category=torget" class="nav-link">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Torget</span>
+                </a>
+                <a href="/browse?category=jobb" class="nav-link">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Jobb</span>
+                </a>
+                <a href="/browse?category=bil_og_campingvogn" class="nav-link">
+                    <i class="fas fa-car"></i>
+                    <span>Bil og campingvogn</span>
+                </a>
+                <a href="/browse?category=eiendom" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Eiendom</span>
+                </a>
+                <a href="/browse?category=reise" class="nav-link">
+                    <i class="fas fa-plane"></i>
+                    <span>Reise</span>
+                </a>
+                <a href="/browse?category=bat" class="nav-link">
+                    <i class="fas fa-ship"></i>
+                    <span>Båt</span>
+                </a>
+                <a href="/browse?category=mc" class="nav-link">
+                    <i class="fas fa-motorcycle"></i>
+                    <span>MC</span>
+                </a>
+                <a href="/governance-dashboard.html" class="nav-link ai-link">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>AI Governance</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Norges smarteste markedsplass</h1>
+                <p>Kjøp, selg og oppdag med AI-drevet sikkerhet og innovasjon</p>
+                
+                <!-- Quick Search -->
+                <div class="quick-search">
+                    <form class="search-form">
+                        <div class="search-categories">
+                            <input type="text" placeholder="Hva leter du etter?" class="search-input">
+                            <select class="location-select">
+                                <option>Hele Norge</option>
+                                <option>Oslo</option>
+                                <option>Bergen</option>
+                                <option>Trondheim</option>
+                                <option>Stavanger</option>
+                            </select>
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i>
+                                Søk
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2>Utforsk kategorier</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="torget">
+                    <div class="category-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3>Torget</h3>
+                    <p>Kjøp og selg alt mulig</p>
+                    <span class="item-count">15,234 annonser</span>
+                </div>
+
+                <div class="category-card" data-category="jobb">
+                    <div class="category-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Jobb</h3>
+                    <p>Finn din neste karrieremulighet</p>
+                    <span class="item-count">2,567 stillinger</span>
+                </div>
+
+                <div class="category-card" data-category="bil_og_campingvogn">
+                    <div class="category-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Bil og campingvogn</h3>
+                    <p>Biler, campingvogner og deler</p>
+                    <span class="item-count">8,921 annonser</span>
+                </div>
+
+                <div class="category-card" data-category="eiendom">
+                    <div class="category-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Eiendom</h3>
+                    <p>Boliger til salgs og leie</p>
+                    <span class="item-count">3,456 eiendommer</span>
+                </div>
+
+                <div class="category-card" data-category="reise">
+                    <div class="category-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Reise</h3>
+                    <p>Feriehus, reiser og opplevelser</p>
+                    <span class="item-count">1,234 tilbud</span>
+                </div>
+
+                <div class="category-card" data-category="bat">
+                    <div class="category-icon">
+                        <i class="fas fa-anchor"></i>
+                    </div>
+                    <h3>Båt</h3>
+                    <p>Båter og marin utstyr</p>
+                    <span class="item-count">987 annonser</span>
+                </div>
+
+                <div class="category-card" data-category="mc">
+                    <div class="category-icon">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <h3>MC</h3>
+                    <p>Motorsykler og tilbehør</p>
+                    <span class="item-count">654 annonser</span>
+                </div>
+
+                <div class="category-card" data-category="nyttekjoretoy">
+                    <div class="category-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Nyttekjøretøy</h3>
+                    <p>Lastebiler og maskiner</p>
+                    <span class="item-count">432 annonser</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Listings -->
+    <section class="featured-listings">
+        <div class="container">
+            <div class="section-header">
+                <h2>Populære annonser</h2>
+                <a href="/browse" class="view-all">Se alle <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="listings-grid" id="featuredListings">
+                <!-- Listings will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Features Section -->
+    <section class="ai-features">
+        <div class="container">
+            <div class="ai-header">
+                <h2>Trygg handel med AI-teknologi</h2>
+                <p>Raadi bruker avansert kunstig intelligens for å gjøre din handleopplevelse tryggere og mer effektiv</p>
+            </div>
+            
+            <div class="ai-grid">
+                <div class="ai-card">
+                    <div class="ai-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>AI Sikkerhet</h3>
+                    <p>Automatisk svindeldeteksjon og beskyttelse av dine transaksjoner</p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Smart Matching</h3>
+                    <p>Finn det perfekte produktet med AI-drevet anbefalinger</p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Prisanalyse</h3>
+                    <p>Få markedsinnsikt og prisforslag basert på AI-analyse</p>
+                </div>
+
+                <div class="ai-card">
+                    <div class="ai-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>AI-assistert kundeservice for rask hjelp når som helst</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <span class="logo-text">Raadi</span>
+                    </div>
+                    <p>Norges moderne markedsplass med AI-teknologi for trygg og smart handel.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Kategorier</h4>
+                    <ul>
+                        <li><a href="/torget">Torget</a></li>
+                        <li><a href="/jobb">Jobb</a></li>
+                        <li><a href="/bil">Bil og campingvogn</a></li>
+                        <li><a href="/eiendom">Eiendom</a></li>
+                        <li><a href="/reise">Reise</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Tjenester</h4>
+                    <ul>
+                        <li><a href="/bedrift">For bedrifter</a></li>
+                        <li><a href="/api">API</a></li>
+                        <li><a href="/ai">AI-tjenester</a></li>
+                        <li><a href="/sikkerhet">Sikkerhet</a></li>
+                        <li><a href="/support">Kundeservice</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Om Raadi</h4>
+                    <ul>
+                        <li><a href="/om">Om oss</a></li>
+                        <li><a href="/karriere">Karriere</a></li>
+                        <li><a href="/presse">Presse</a></li>
+                        <li><a href="/personvern">Personvern</a></li>
+                        <li><a href="/vilkar">Vilkår</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Raadi AS. Alle rettigheter forbeholdt.</p>
+                <p>Drevet av AI-teknologi for trygg og smart handel.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

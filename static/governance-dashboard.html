@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raadi AI Governance Dashboard</title>
+    <link rel="stylesheet" href="static/css/governance-dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <h1>Raadi AI</h1>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li class="nav-item active" data-section="overview">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Oversikt</span>
+                    </li>
+                    <li class="nav-item" data-section="compliance">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Compliance</span>
+                    </li>
+                    <li class="nav-item" data-section="risk">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Risikoanalyse</span>
+                    </li>
+                    <li class="nav-item" data-section="content">
+                        <i class="fas fa-search"></i>
+                        <span>Innhold Skanning</span>
+                    </li>
+                    <li class="nav-item" data-section="policies">
+                        <i class="fas fa-file-contract"></i>
+                        <span>Retningslinjer</span>
+                    </li>
+                    <li class="nav-item" data-section="analytics">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analyse</span>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="/" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Tilbake til Raadi
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h2 id="page-title">AI Governance Oversikt</h2>
+                    <p id="page-subtitle">Sanntidsovervåkning av AI-systemer og compliance</p>
+                </div>
+                <div class="header-right">
+                    <div class="status-indicator">
+                        <span class="status-dot active"></span>
+                        <span>System Aktiv</span>
+                    </div>
+                    <div class="last-updated">
+                        Sist oppdatert: <span id="last-updated-time">--:--</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content Sections -->
+            
+            <!-- Overview Section -->
+            <section id="overview-section" class="dashboard-section active">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-shield-check"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3 id="governance-score">--</h3>
+                            <p>Governance Score</p>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3 id="compliance-rate">--%</h3>
+                            <p>Compliance Rate</p>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3 id="risk-level">--</h3>
+                            <p>Risk Level</p>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3 id="scanned-items">--</h3>
+                            <p>Skannede Elementer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h4>Compliance Trend</h4>
+                        <canvas id="complianceChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h4>Risk Distribution</h4>
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="recent-activities">
+                    <h4>Nylige Aktiviteter</h4>
+                    <div id="activities-list" class="activities-list">
+                        <!-- Activities will be populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Compliance Section -->
+            <section id="compliance-section" class="dashboard-section">
+                <div class="compliance-overview">
+                    <div class="compliance-grid">
+                        <div class="compliance-card">
+                            <h4>GDPR Compliance</h4>
+                            <div class="compliance-score">
+                                <span id="gdpr-score">--%</span>
+                                <div class="progress-bar">
+                                    <div id="gdpr-progress" class="progress-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="compliance-card">
+                            <h4>AI Fairness</h4>
+                            <div class="compliance-score">
+                                <span id="fairness-score">--%</span>
+                                <div class="progress-bar">
+                                    <div id="fairness-progress" class="progress-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="compliance-card">
+                            <h4>Data Protection</h4>
+                            <div class="compliance-score">
+                                <span id="data-protection-score">--%</span>
+                                <div class="progress-bar">
+                                    <div id="data-protection-progress" class="progress-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="compliance-details">
+                    <h4>Compliance Detaljer</h4>
+                    <div id="compliance-details-list" class="details-list">
+                        <!-- Compliance details will be populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Risk Assessment Section -->
+            <section id="risk-section" class="dashboard-section">
+                <div class="risk-overview">
+                    <div class="risk-matrix">
+                        <h4>Risiko Matrix</h4>
+                        <div id="risk-matrix-grid" class="matrix-grid">
+                            <!-- Risk matrix will be populated by JS -->
+                        </div>
+                    </div>
+                    
+                    <div class="risk-categories">
+                        <h4>Risiko Kategorier</h4>
+                        <div id="risk-categories-list" class="categories-list">
+                            <!-- Risk categories will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="risk-recommendations">
+                    <h4>Anbefalinger</h4>
+                    <div id="recommendations-list" class="recommendations-list">
+                        <!-- Recommendations will be populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Scanning Section -->
+            <section id="content-section" class="dashboard-section">
+                <div class="content-scanner">
+                    <h4>Innhold Skanner</h4>
+                    <div class="scanner-form">
+                        <textarea id="content-input" placeholder="Skriv inn innhold for skanning..."></textarea>
+                        <button id="scan-button" class="scan-btn">
+                            <i class="fas fa-search"></i>
+                            Skann Innhold
+                        </button>
+                    </div>
+                    
+                    <div id="scan-results" class="scan-results">
+                        <!-- Scan results will be populated by JS -->
+                    </div>
+                </div>
+
+                <div class="scan-history">
+                    <h4>Skannings Historikk</h4>
+                    <div id="scan-history-list" class="history-list">
+                        <!-- Scan history will be populated by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Policies Section -->
+            <section id="policies-section" class="dashboard-section">
+                <div class="policies-overview">
+                    <h4>Aktive Retningslinjer</h4>
+                    <div id="policies-list" class="policies-list">
+                        <!-- Policies will be populated by JS -->
+                    </div>
+                </div>
+
+                <div class="policy-compliance">
+                    <h4>Retningslinje Compliance</h4>
+                    <canvas id="policyComplianceChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics-section" class="dashboard-section">
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h4>Governance Performance</h4>
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <h4>Monthly Trends</h4>
+                        <canvas id="trendsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="analytics-insights">
+                    <h4>AI Insights</h4>
+                    <div id="insights-list" class="insights-list">
+                        <!-- Insights will be populated by JS -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Laster data...</p>
+        </div>
+    </div>
+
+    <script src="static/js/governance-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bla i annonser - Raadi Marketplace</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="/" class="logo">
+                    <i class="fas fa-store"></i>
+                    <span>Raadi</span>
+                </a>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/">Hjem</a></li>
+                    <li><a href="/browse" class="active">Bla i annonser</a></li>
+                    <li><a href="/governance-dashboard.html">AI Governance</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-actions">
+                <button class="btn btn-outline">Logg inn</button>
+                <button class="btn btn-primary">Legg ut annonse</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Browse Hero Section -->
+    <section class="browse-hero">
+        <div class="container">
+            <h1>Bla i alle annonser</h1>
+            <p>Finn det du leter etter blant tusenvis av annonser</p>
+            
+            <!-- Enhanced Search -->
+            <div class="search-container">
+                <form class="search-form">
+                    <div class="search-input-group">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Hva leter du etter?">
+                        <button type="submit" class="search-btn">
+                            <i class="fas fa-search"></i>
+                            Søk
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Browse Content -->
+    <section class="browse-content">
+        <div class="container">
+            <div class="browse-layout">
+                <!-- Sidebar Filters -->
+                <aside class="browse-sidebar">
+                    <div class="filter-section">
+                        <h3>Kategorier</h3>
+                        <div class="category-filters">
+                            <button class="category-btn active" data-category="">Alle</button>
+                            <button class="category-btn" data-category="torget">
+                                <i class="fas fa-shopping-bag"></i>
+                                Torget
+                            </button>
+                            <button class="category-btn" data-category="jobb">
+                                <i class="fas fa-briefcase"></i>
+                                Jobb
+                            </button>
+                            <button class="category-btn" data-category="bil_og_campingvogn">
+                                <i class="fas fa-car"></i>
+                                Bil & Campingvogn
+                            </button>
+                            <button class="category-btn" data-category="eiendom">
+                                <i class="fas fa-home"></i>
+                                Eiendom
+                            </button>
+                            <button class="category-btn" data-category="reise">
+                                <i class="fas fa-plane"></i>
+                                Reise
+                            </button>
+                            <button class="category-btn" data-category="bat">
+                                <i class="fas fa-ship"></i>
+                                Båt
+                            </button>
+                            <button class="category-btn" data-category="mc">
+                                <i class="fas fa-motorcycle"></i>
+                                MC
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Pris</h3>
+                        <div class="price-filters">
+                            <input type="number" id="min-price" placeholder="Fra" class="price-input">
+                            <span class="price-separator">-</span>
+                            <input type="number" id="max-price" placeholder="Til" class="price-input">
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Sted</h3>
+                        <input type="text" id="location-filter" placeholder="Skriv inn sted" class="location-input">
+                    </div>
+
+                    <div class="filter-section">
+                        <button class="btn btn-primary filter-apply-btn">Bruk filtre</button>
+                        <button class="btn btn-outline filter-reset-btn">Nullstill</button>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="browse-main">
+                    <div class="browse-header">
+                        <div class="browse-results-info">
+                            <span id="results-count">Laster...</span>
+                        </div>
+                        <div class="browse-sort">
+                            <select id="sort-select" class="sort-dropdown">
+                                <option value="newest">Nyeste først</option>
+                                <option value="oldest">Eldste først</option>
+                                <option value="price-low">Laveste pris</option>
+                                <option value="price-high">Høyeste pris</option>
+                                <option value="popular">Mest populære</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="listings-grid" id="listings-container">
+                        <!-- Listings will be populated by JavaScript -->
+                    </div>
+
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination will be populated by JavaScript -->
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-spinner hidden">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Laster annonser...</p>
+    </div>
+
+    <!-- Listing Modal -->
+    <div id="listing-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modal-body">
+                <!-- Modal content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="static/js/browse.js"></script>
+</body>
+</html>

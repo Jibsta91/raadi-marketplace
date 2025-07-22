@@ -1,0 +1,158 @@
+version: '3.8'
+
+services:
+  # Main Web Application
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://raadi_user:raadi_pass@db:5432/raadi_db
+      - REDIS_URL=redis://redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - db
+      - redis
+      - elasticsearch
+    volumes:
+      - .:/workspace
+      - ./uploads:/uploads
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # AI Governance Service
+  ai_governance:
+    build:
+      context: .
+      dockerfile: Dockerfile.ai_governance
+    ports:
+      - "8001:8001"
+    environment:
+      - DATABASE_URL=postgresql://raadi_user:raadi_pass@db:5432/raadi_db
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
+
+  # AI Cybersecurity Service
+  ai_cybersecurity:
+    build:
+      context: .
+      dockerfile: Dockerfile.ai_cybersecurity
+    ports:
+      - "8002:8002"
+    environment:
+      - DATABASE_URL=postgresql://raadi_user:raadi_pass@db:5432/raadi_db
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
+
+  # AI Infrastructure Service
+  ai_infrastructure:
+    build:
+      context: .
+      dockerfile: Dockerfile.ai_infrastructure
+    ports:
+      - "8003:8003"
+    environment:
+      - DATABASE_URL=postgresql://raadi_user:raadi_pass@db:5432/raadi_db
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
+
+  # AI Data Management Service
+  ai_datamanagement:
+    build:
+      context: .
+      dockerfile: Dockerfile.ai_datamanagement
+    ports:
+      - "8004:8004"
+    environment:
+      - DATABASE_URL=postgresql://raadi_user:raadi_pass@db:5432/raadi_db
+      - REDIS_URL=redis://redis:6379
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - db
+      - redis
+      - elasticsearch
+
+  # Background Worker
+  worker:
+    build: .
+    command: celery -A app.celery_app worker --loglevel=info
+    environment:
+      - DATABASE_URL=postgresql://raadi_user:raadi_pass@db:5432/raadi_db
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/workspace
+
+  # Task Scheduler
+  scheduler:
+    build: .
+    command: celery -A app.celery_app beat --loglevel=info
+    environment:
+      - DATABASE_URL=postgresql://raadi_user:raadi_pass@db:5432/raadi_db
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/workspace
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=raadi_db
+      - POSTGRES_USER=raadi_user
+      - POSTGRES_PASSWORD=raadi_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  # Redis Cache & Message Broker
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  # Elasticsearch for Search
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - web
+      - ai_governance
+      - ai_cybersecurity
+      - ai_infrastructure
+      - ai_datamanagement
+
+volumes:
+  postgres_data:
+  redis_data:
+  elasticsearch_data:

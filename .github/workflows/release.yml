@@ -9,11 +9,11 @@ on:
       tag_name:
         description: 'Tag name for the release'
         required: true
-        default: 'v18'
+        default: 'v19'
       release_name:
         description: 'Release name'
         required: true
-        default: 'Release v18'
+        default: 'Release v19'
 
 permissions:
   contents: write
@@ -40,21 +40,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.event.inputs.tag_name || 'v18' }}
-          release_name: ${{ github.event.inputs.release_name || 'Release v18' }}
+          tag_name: ${{ github.event.inputs.tag_name || 'v19' }}
+          release_name: ${{ github.event.inputs.release_name || 'Release v19' }}
           body: |
-            ## Raadi Marketplace Release v18
+            ## Raadi Marketplace Release v19
             
             **Changes in this release:**
-            Fix static files and complete marketplace rebuild
+            Add release workflow for automated GitHub releases
             
             ### 🚀 New Features & Improvements
-            - Fixed empty index.html file issue during Docker rebuild
-            - Updated comprehensive marketplace frontend with all features
-            - Enhanced browse.js with full interactive functionality
-            - Improved CSS styling and responsive design
-            - All services operational and frontend fully connected to backend
-            - Marketplace now fully functional at localhost:8000
+            - Added comprehensive release workflow with proper permissions
+            - Includes automated Docker build and ECR push
+            - Supports both tag-triggered and manual releases
+            - Integrated with AWS ECS deployment
+            - Enhanced release notes with technical details
             
             ### 🐳 Docker Images
             ```
@@ -84,7 +83,7 @@ jobs:
             - AI services (governance, cybersecurity, infrastructure, data management)
             - Nginx reverse proxy
             
-            **Full Changelog:** https://github.com/Jibsta91/raadi-marketplace/compare/v17...v18
+            **Full Changelog:** https://github.com/Jibsta91/raadi-marketplace/compare/v18...v19
           draft: false
           prerelease: false
 
@@ -111,7 +110,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: raadi-marketplace
-          IMAGE_TAG: ${{ github.event.inputs.tag_name || 'v18' }}
+          IMAGE_TAG: ${{ github.event.inputs.tag_name || 'v19' }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest

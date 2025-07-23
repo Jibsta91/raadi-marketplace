@@ -17,11 +17,12 @@ python-multipart==0.0.6
 # Configuration and validation
 pydantic==2.5.2
 pydantic-settings==2.1.0
+email-validator==2.1.0.post1
 python-dotenv==1.0.0
 
 # Redis and caching
 redis==5.0.1
-aioredis==2.0.1
+redis[hiredis]==5.0.1
 celery==5.3.4
 
 # Elasticsearch

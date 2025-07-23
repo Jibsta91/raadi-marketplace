@@ -1,19 +1,37 @@
-# Raadi - Norwegian Enterprise Marketplace
-*.pyc
+# Terraform files
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfplan.*
+.terraform/
+.terraform.lock.hcl
+
+# Python
 __pycache__/
+*.py[cod]
+*.class
 .env
-.venv/
+.venv
+env/
 venv/
-uploads/*
-!uploads/.gitkeep
-*.log
-.DS_Store
-Thumbs.db
+
+# IDE
 .vscode/
 .idea/
-*.db
-*.sqlite
-dist/
-build/
-node_modules/
-coverage/
+
+# AWS
+.aws/
+
+# Docker
+.dockerignore
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Security reports
+*-report.json

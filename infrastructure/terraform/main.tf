@@ -22,8 +22,7 @@ terraform {
     organization = "raadi-marketplace"
     
     workspaces {
-      project = "prj-CPNeHfFfgeyMqGGG"
-      name    = "ws-MYEXTVRn8FhGXQjS"
+      name = "ws-MYEXTVRn8FhGXQjS"
     }
   }
 }

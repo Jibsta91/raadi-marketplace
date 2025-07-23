@@ -6,24 +6,13 @@ variable "project_name" {
   default     = "raadi-marketplace"
 }
 
-# Alias for backward compatibility
-variable "app_name" {
-  description = "Application name (alias for project_name)"
-  type        = string
-  default     = null
-}
-
-locals {
-  app_name = var.app_name != null ? var.app_name : var.project_name
-}
-
 variable "environment" {
   description = "Environment name"
   type        = string
   default     = "prod"
   validation {
-    condition     = contains(["prod"], var.environment)
-    error_message = "Environment must be: prod (production-only setup)."
+    condition     = contains(["dev", "test", "prod"], var.environment)
+    error_message = "Environment must be one of: dev, test, prod."
   }
 }
 
@@ -36,11 +25,13 @@ variable "aws_region" {
 variable "domain_name" {
   description = "Domain name for the application"
   type        = string
+  default     = ""
 }
 
 variable "cloudflare_api_token" {
   description = "Cloudflare API token"
   type        = string
+  default     = ""
   sensitive   = true
 }
 
@@ -134,27 +125,8 @@ variable "enable_waf" {
   default     = true
 }
 
-# Missing variables for ECS configuration
-variable "cpu" {
-  description = "CPU units for ECS task"
-  type        = number
-  default     = 512
-}
-
-variable "memory" {
-  description = "Memory for ECS task"
-  type        = number
-  default     = 1024
-}
-
-variable "desired_count" {
-  description = "Desired number of ECS tasks"
-  type        = number
-  default     = 2
-}
-
 variable "image_tag" {
-  description = "Docker image tag for deployment"
+  description = "Docker image tag to deploy"
   type        = string
   default     = "latest"
 }

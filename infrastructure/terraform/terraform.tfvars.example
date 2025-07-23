@@ -1,0 +1,19 @@
+# Production Configuration for Raadi Marketplace
+# Copy this file to terraform.tfvars and update the values
+
+aws_region = "us-east-1"
+app_name   = "raadi-marketplace"
+environment = "prod"
+
+# VPC Configuration
+vpc_cidr = "10.0.0.0/16"
+availability_zones = ["us-east-1a", "us-east-1b"]
+
+# ECS Configuration
+desired_count = 2
+cpu          = 512
+memory       = 1024
+
+# Application Configuration
+domain_name = "raadi.no"
+image_tag   = "latest"

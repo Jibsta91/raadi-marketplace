@@ -44,7 +44,7 @@ variable "vpc_cidr" {
 variable "availability_zones" {
   description = "Availability zones to use"
   type        = list(string)
-  default     = []
+  default     = ["us-east-1a", "us-east-1b"]
 }
 
 variable "enable_nat_gateway" {
@@ -129,4 +129,22 @@ variable "image_tag" {
   description = "Docker image tag to deploy"
   type        = string
   default     = "latest"
+}
+
+variable "cpu" {
+  description = "Number of cpu units used by the task"
+  type        = number
+  default     = 256
+}
+
+variable "memory" {
+  description = "Amount (in MiB) of memory used by the task"
+  type        = number
+  default     = 512
+}
+
+variable "desired_count" {
+  description = "Number of instances of the task definition to place and keep running"
+  type        = number
+  default     = 1
 }

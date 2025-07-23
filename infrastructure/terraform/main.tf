@@ -19,10 +19,10 @@ terraform {
 
   # Terraform Cloud configuration
   cloud {
-    organization = "raadi-marketplace"
+    organization = "jibsta91"
     
     workspaces {
-      name = "ws-MYEXTVRn8FhGXQjS"
+      name = "raadi"
     }
   }
 }

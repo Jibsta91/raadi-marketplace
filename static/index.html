@@ -3,226 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raadi - Norges moderne markedsplass</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>Raadi - Norges ledende AI-drevne markedsplass</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <meta name="description" content="Raadi - AI-drevet markedsplass for bil, eiendom, jobb, reise og mer. Trygg handel med avansert AI-styring og cybersikkerhet.">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Navigation Header -->
     <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <!-- Logo -->
-                <div class="logo">
-                    <a href="/">
-                        <div class="logo-icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <span class="logo-text">Raadi</span>
-                    </a>
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1 class="logo-text">Raadi</h1>
+                    <span class="logo-tagline">AI-Powered Marketplace</span>
                 </div>
-
-                <!-- Search Bar -->
-                <div class="search-container">
-                    <form class="search-form">
-                        <div class="search-bar">
-                            <i class="fas fa-search search-icon"></i>
-                            <input type="text" placeholder="Søk etter annonser, tjenester og mer..." class="search-input">
-                            <button type="submit" class="search-btn">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
+                
+                <div class="nav-menu">
+                    <a href="#torget" class="nav-link">Torget</a>
+                    <a href="#jobb" class="nav-link">Jobb</a>
+                    <a href="#bil" class="nav-link">Bil & Campingvogn</a>
+                    <a href="#eiendom" class="nav-link">Eiendom</a>
+                    <a href="#reise" class="nav-link">Reise</a>
+                    <a href="#bat" class="nav-link">Båt</a>
+                    <a href="#mc" class="nav-link">MC</a>
+                    <a href="#nyttekjoretoy" class="nav-link">Nyttekjøretøy</a>
                 </div>
-
-                <!-- User Actions -->
-                <div class="user-actions">
-                    <button class="btn btn-outline">
-                        <i class="fas fa-bell"></i>
-                        <span>Varsler</span>
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-plus"></i>
-                        <span>Ny annonse</span>
-                    </button>
-                    <button class="btn btn-outline">
-                        <i class="fas fa-envelope"></i>
-                        <span>Meldinger</span>
-                    </button>
-                    <button class="btn btn-ghost">
-                        <i class="fas fa-user"></i>
-                        <span>Logg inn</span>
-                    </button>
+                
+                <div class="nav-actions">
+                    <a href="login.html" class="btn-secondary">Logg inn</a>
+                    <a href="register.html" class="btn-primary">Registrer deg</a>
                 </div>
             </div>
-        </div>
+        </nav>
     </header>
-
-    <!-- Navigation Menu -->
-    <nav class="main-nav">
-        <div class="container">
-            <div class="nav-links">
-                <a href="/" class="nav-link active">
-                    <i class="fas fa-home"></i>
-                    <span>Forside</span>
-                </a>
-                <a href="/browse?category=torget" class="nav-link">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span>Torget</span>
-                </a>
-                <a href="/browse?category=jobb" class="nav-link">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Jobb</span>
-                </a>
-                <a href="/browse?category=bil_og_campingvogn" class="nav-link">
-                    <i class="fas fa-car"></i>
-                    <span>Bil og campingvogn</span>
-                </a>
-                <a href="/browse?category=eiendom" class="nav-link">
-                    <i class="fas fa-home"></i>
-                    <span>Eiendom</span>
-                </a>
-                <a href="/browse?category=reise" class="nav-link">
-                    <i class="fas fa-plane"></i>
-                    <span>Reise</span>
-                </a>
-                <a href="/browse?category=bat" class="nav-link">
-                    <i class="fas fa-ship"></i>
-                    <span>Båt</span>
-                </a>
-                <a href="/browse?category=mc" class="nav-link">
-                    <i class="fas fa-motorcycle"></i>
-                    <span>MC</span>
-                </a>
-                <a href="/governance-dashboard.html" class="nav-link ai-link">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>AI Governance</span>
-                </a>
-            </div>
-        </div>
-    </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
+        <div class="hero-container">
             <div class="hero-content">
-                <h1>Norges smarteste markedsplass</h1>
-                <p>Kjøp, selg og oppdag med AI-drevet sikkerhet og innovasjon</p>
-                
-                <!-- Quick Search -->
-                <div class="quick-search">
-                    <form class="search-form">
-                        <div class="search-categories">
-                            <input type="text" placeholder="Hva leter du etter?" class="search-input">
-                            <select class="location-select">
-                                <option>Hele Norge</option>
-                                <option>Oslo</option>
-                                <option>Bergen</option>
-                                <option>Trondheim</option>
-                                <option>Stavanger</option>
-                            </select>
-                            <button type="submit" class="search-btn">
-                                <i class="fas fa-search"></i>
-                                Søk
-                            </button>
-                        </div>
-                    </form>
+                <h1 class="hero-title">
+                    Norges mest avanserte
+                    <span class="highlight">AI-drevne markedsplass</span>
+                </h1>
+                <p class="hero-description">
+                    Opplev fremtiden for online handel med AI-styrt sikkerhet, automatisert kvalitetskontroll, 
+                    og personaliserte anbefalinger. Trygg, smart, og effektiv handel for alle.
+                </p>
+                <div class="hero-search">
+                    <input type="text" placeholder="Søk blant millioner av annonser..." class="search-input">
+                    <button class="search-btn">Søk</button>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Categories Section -->
-    <section class="categories">
-        <div class="container">
-            <h2>Utforsk kategorier</h2>
-            <div class="categories-grid">
-                <div class="category-card" data-category="torget">
-                    <div class="category-icon">
-                        <i class="fas fa-shopping-bag"></i>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">2M+</span>
+                        <span class="stat-label">Aktive annonser</span>
                     </div>
-                    <h3>Torget</h3>
-                    <p>Kjøp og selg alt mulig</p>
-                    <span class="item-count">15,234 annonser</span>
-                </div>
-
-                <div class="category-card" data-category="jobb">
-                    <div class="category-icon">
-                        <i class="fas fa-briefcase"></i>
+                    <div class="stat">
+                        <span class="stat-number">500K+</span>
+                        <span class="stat-label">Registrerte brukere</span>
                     </div>
-                    <h3>Jobb</h3>
-                    <p>Finn din neste karrieremulighet</p>
-                    <span class="item-count">2,567 stillinger</span>
-                </div>
-
-                <div class="category-card" data-category="bil_og_campingvogn">
-                    <div class="category-icon">
-                        <i class="fas fa-car"></i>
+                    <div class="stat">
+                        <span class="stat-number">99.9%</span>
+                        <span class="stat-label">Sikkerhet med AI</span>
                     </div>
-                    <h3>Bil og campingvogn</h3>
-                    <p>Biler, campingvogner og deler</p>
-                    <span class="item-count">8,921 annonser</span>
                 </div>
-
-                <div class="category-card" data-category="eiendom">
-                    <div class="category-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <h3>Eiendom</h3>
-                    <p>Boliger til salgs og leie</p>
-                    <span class="item-count">3,456 eiendommer</span>
-                </div>
-
-                <div class="category-card" data-category="reise">
-                    <div class="category-icon">
-                        <i class="fas fa-plane"></i>
-                    </div>
-                    <h3>Reise</h3>
-                    <p>Feriehus, reiser og opplevelser</p>
-                    <span class="item-count">1,234 tilbud</span>
-                </div>
-
-                <div class="category-card" data-category="bat">
-                    <div class="category-icon">
-                        <i class="fas fa-anchor"></i>
-                    </div>
-                    <h3>Båt</h3>
-                    <p>Båter og marin utstyr</p>
-                    <span class="item-count">987 annonser</span>
-                </div>
-
-                <div class="category-card" data-category="mc">
-                    <div class="category-icon">
-                        <i class="fas fa-motorcycle"></i>
-                    </div>
-                    <h3>MC</h3>
-                    <p>Motorsykler og tilbehør</p>
-                    <span class="item-count">654 annonser</span>
-                </div>
-
-                <div class="category-card" data-category="nyttekjoretoy">
-                    <div class="category-icon">
-                        <i class="fas fa-truck"></i>
-                    </div>
-                    <h3>Nyttekjøretøy</h3>
-                    <p>Lastebiler og maskiner</p>
-                    <span class="item-count">432 annonser</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Listings -->
-    <section class="featured-listings">
-        <div class="container">
-            <div class="section-header">
-                <h2>Populære annonser</h2>
-                <a href="/browse" class="view-all">Se alle <i class="fas fa-arrow-right"></i></a>
-            </div>
-            
-            <div class="listings-grid" id="featuredListings">
-                <!-- Listings will be loaded dynamically -->
             </div>
         </div>
     </section>
@@ -230,42 +76,282 @@
     <!-- AI Features Section -->
     <section class="ai-features">
         <div class="container">
-            <div class="ai-header">
-                <h2>Trygg handel med AI-teknologi</h2>
-                <p>Raadi bruker avansert kunstig intelligens for å gjøre din handleopplevelse tryggere og mer effektiv</p>
+            <h2 class="section-title">AI-Powered Service Enhancements</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>AI Governance</h3>
+                    <p>Avansert bias-deteksjon, transparensrapporter og automatisert overholdelse av regelverk</p>
+                    <ul class="feature-list">
+                        <li>Automatisk innholdsmoderering</li>
+                        <li>Svindeldeteksjon i sanntid</li>
+                        <li>Etterlevelse av GDPR</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>AI Cybersecurity</h3>
+                    <p>Automatisert hendelsesrespons, proaktive sikkerhetsvurderinger og trussel-intelligens</p>
+                    <ul class="feature-list">
+                        <li>24/7 trusseldeteksjon</li>
+                        <li>Sårbarhetsscanning</li>
+                        <li>Sikkerheetsovervåking</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>AI Infrastructure</h3>
+                    <p>Prediktiv skalering, kostnadsoptimaliseringsalgoritmer og automatisert vedlikehold</p>
+                    <ul class="feature-list">
+                        <li>Auto-skalering</li>
+                        <li>Ressursoptimalisering</li>
+                        <li>Prediktivt vedlikehold</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>AI Data Management</h3>
+                    <p>Automatisert sporing av dataherkomst, selvhelbredende datakvalitet og GDPR-automatisering</p>
+                    <ul class="feature-list">
+                        <li>Datakvalitetsvurdering</li>
+                        <li>Personvernsetterlevelse</li>
+                        <li>Livssyklusadministrasjon</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seller Management Section -->
+    <section class="seller-management">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Komplett selgeradministrasjon</h2>
+                <p class="section-subtitle">Alt du trenger for å drive en vellykket nettbutikk</p>
             </div>
             
-            <div class="ai-grid">
-                <div class="ai-card">
-                    <div class="ai-icon">
-                        <i class="fas fa-shield-alt"></i>
+            <div class="management-grid">
+                <div class="management-card">
+                    <div class="card-icon">📦</div>
+                    <h3>MasseoppLastning og lagerstyring</h3>
+                    <p>Last opp tusenvis av produkter samtidig med vår AI-assisterte bulkopplastning</p>
+                    <div class="card-features">
+                        <span class="feature-tag">CSV/Excel import</span>
+                        <span class="feature-tag">Automatisk kategorisering</span>
+                        <span class="feature-tag">Lagerstatus i sanntid</span>
                     </div>
-                    <h3>AI Sikkerhet</h3>
-                    <p>Automatisk svindeldeteksjon og beskyttelse av dine transaksjoner</p>
                 </div>
-
-                <div class="ai-card">
-                    <div class="ai-icon">
-                        <i class="fas fa-brain"></i>
+                
+                <div class="management-card">
+                    <div class="card-icon">📈</div>
+                    <h3>Salgssporing og ytelsesanalyse</h3>
+                    <p>Detaljerte analyser og KPI-oversikt for å optimalisere salget ditt</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Sanntidsanalyse</span>
+                        <span class="feature-tag">Salgsprognoser</span>
+                        <span class="feature-tag">Kundeadferd</span>
                     </div>
-                    <h3>Smart Matching</h3>
-                    <p>Finn det perfekte produktet med AI-drevet anbefalinger</p>
                 </div>
-
-                <div class="ai-card">
-                    <div class="ai-icon">
-                        <i class="fas fa-chart-line"></i>
+                
+                <div class="management-card">
+                    <div class="card-icon">🎨</div>
+                    <h3>Butikktilpasning og merkevareverktøy</h3>
+                    <p>Lag din unike butikkidentitet med våre avanserte tilpasningsverktøy</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Egendefinerte temaer</span>
+                        <span class="feature-tag">Logo og farger</span>
+                        <span class="feature-tag">Mobilvennlig design</span>
                     </div>
-                    <h3>Prisanalyse</h3>
-                    <p>Få markedsinnsikt og prisforslag basert på AI-analyse</p>
                 </div>
-
-                <div class="ai-card">
-                    <div class="ai-icon">
-                        <i class="fas fa-robot"></i>
+                
+                <div class="management-card">
+                    <div class="card-icon">🚚</div>
+                    <h3>Ordreoppfyllelse og fraktintegrasjon</h3>
+                    <p>Sømløs integrasjon med alle større fraktselskaper i Norge</p>
+                    <div class="card-features">
+                        <span class="feature-tag">Posten integrasjon</span>
+                        <span class="feature-tag">DHL Express</span>
+                        <span class="feature-tag">Bring logistics</span>
                     </div>
-                    <h3>24/7 Support</h3>
-                    <p>AI-assistert kundeservice for rask hjelp når som helst</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buyer Experience Section -->
+    <section class="buyer-experience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Exceptionell kjøperopplevelse</h2>
+                <p class="section-subtitle">Designet for enkelt og trygt shopping</p>
+            </div>
+            
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="card-icon">🔍</div>
+                    <h3>Avansert søk med dynamisk filtrering</h3>
+                    <p>Finn nøyaktig det du leter etter med AI-drevet søk og smarte filtre</p>
+                    <ul class="experience-features">
+                        <li>Bildgjenkjenning</li>
+                        <li>Naturlig språksøk</li>
+                        <li>Prediksjon av ønsker</li>
+                        <li>Geografisk filtrering</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="card-icon">⭐</div>
+                    <h3>Kundeanmeldelser og vurderingssystem</h3>
+                    <p>Verifiserte anmeldelser og detaljerte vurderinger for trygg handel</p>
+                    <ul class="experience-features">
+                        <li>Verifiserte kjøpervurderinger</li>
+                        <li>Bilder fra kunder</li>
+                        <li>AI-deteksjon av falske anmeldelser</li>
+                        <li>Salgervurderinger</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="card-icon">❤️</div>
+                    <h3>Favoritter og ønskelistehåndtering</h3>
+                    <p>Organiser og følg med på produkter du er interessert i</p>
+                    <ul class="experience-features">
+                        <li>Ubegrensede ønskelister</li>
+                        <li>Prisvarslinger</li>
+                        <li>Tilgjengelighetsmeldinger</li>
+                        <li>Delte ønskelister</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="card-icon">📱</div>
+                    <h3>Ordresporing og historikk</h3>
+                    <p>Komplett oversikt over alle dine bestillinger og leveranser</p>
+                    <ul class="experience-features">
+                        <li>Sanntidssporing</li>
+                        <li>Leveringsnotifikasjoner</li>
+                        <li>Digital kvittering</li>
+                        <li>Enkel retur</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Grid -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Utforsk kategorier</h2>
+            <div class="categories-grid">
+                <a href="browse.html?category=torget" class="category-card">
+                    <div class="category-icon">🏪</div>
+                    <h3>Torget</h3>
+                    <p>Generell markedsplass</p>
+                </a>
+                
+                <a href="browse.html?category=jobb" class="category-card">
+                    <div class="category-icon">💼</div>
+                    <h3>Jobb</h3>
+                    <p>Stillingsannonser og karrieremuligheter</p>
+                </a>
+                
+                <a href="browse.html?category=bil" class="category-card">
+                    <div class="category-icon">🚗</div>
+                    <h3>Bil og campingvogn</h3>
+                    <p>Biler og campingutstyr</p>
+                </a>
+                
+                <a href="browse.html?category=eiendom" class="category-card">
+                    <div class="category-icon">🏠</div>
+                    <h3>Eiendom</h3>
+                    <p>Boliger og eiendomsmarked</p>
+                </a>
+                
+                <a href="browse.html?category=reise" class="category-card">
+                    <div class="category-icon">✈️</div>
+                    <h3>Reise</h3>
+                    <p>Reiseutbydere og tjenester</p>
+                </a>
+                
+                <a href="browse.html?category=bat" class="category-card">
+                    <div class="category-icon">⛵</div>
+                    <h3>Båt</h3>
+                    <p>Båter og marine kjøretøy</p>
+                </a>
+                
+                <a href="browse.html?category=mc" class="category-card">
+                    <div class="category-icon">🏍️</div>
+                    <h3>MC</h3>
+                    <p>Motorsykler</p>
+                </a>
+                
+                <a href="browse.html?category=nyttekjoretoy" class="category-card">
+                    <div class="category-icon">🚛</div>
+                    <h3>Nyttekjøretøy</h3>
+                    <p>Kommersielle kjøretøy og maskiner</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust & Security Section -->
+    <section class="trust-security">
+        <div class="container">
+            <div class="trust-content">
+                <div class="trust-text">
+                    <h2>Trygghet og tillit i fokus</h2>
+                    <p>Vi bruker avansert AI-teknologi for å sikre at hver transaksjon er trygg og pålitelig.</p>
+                    
+                    <div class="trust-features">
+                        <div class="trust-feature">
+                            <div class="trust-icon">🔐</div>
+                            <div class="trust-info">
+                                <h4>Sikre betalinger</h4>
+                                <p>PCI DSS-kompatible betalinger med flere betalingsalternativer</p>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-feature">
+                            <div class="trust-icon">🛡️</div>
+                            <div class="trust-info">
+                                <h4>AI-drevet svindeldeteksjon</h4>
+                                <p>Avanserte algoritmer som oppdager og forhindrer svindel i sanntid</p>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-feature">
+                            <div class="trust-icon">↩️</div>
+                            <div class="trust-info">
+                                <h4>Transparent returpolitikk</h4>
+                                <p>Enkle og tydelige returprosedyrer som reduserer kjøpsangst</p>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-feature">
+                            <div class="trust-icon">💬</div>
+                            <div class="trust-info">
+                                <h4>Integrert kundestøtte</h4>
+                                <p>24/7 chat, omfattende FAQ og tydelige hjelpekanaler</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Klar til å oppleve fremtiden for online handel?</h2>
+                <p>Bli med over 500,000 brukere som allerede handler trygt på Raadi</p>
+                <div class="cta-buttons">
+                    <a href="register.html" class="btn-primary btn-large">Start din reise</a>
+                    <a href="browse.html" class="btn-secondary btn-large">Utforsk markedsplassen</a>
                 </div>
             </div>
         </div>
@@ -276,62 +362,58 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <div class="footer-logo">
-                        <div class="logo-icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <span class="logo-text">Raadi</span>
-                    </div>
-                    <p>Norges moderne markedsplass med AI-teknologi for trygg og smart handel.</p>
+                    <h3>Raadi</h3>
+                    <p>Norges mest avanserte AI-drevne markedsplass</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="Instagram">📷</a>
                     </div>
                 </div>
-
+                
                 <div class="footer-section">
                     <h4>Kategorier</h4>
                     <ul>
-                        <li><a href="/torget">Torget</a></li>
-                        <li><a href="/jobb">Jobb</a></li>
-                        <li><a href="/bil">Bil og campingvogn</a></li>
-                        <li><a href="/eiendom">Eiendom</a></li>
-                        <li><a href="/reise">Reise</a></li>
+                        <li><a href="browse.html?category=torget">Torget</a></li>
+                        <li><a href="browse.html?category=jobb">Jobb</a></li>
+                        <li><a href="browse.html?category=bil">Bil & Campingvogn</a></li>
+                        <li><a href="browse.html?category=eiendom">Eiendom</a></li>
                     </ul>
                 </div>
-
+                
                 <div class="footer-section">
-                    <h4>Tjenester</h4>
+                    <h4>Støtte</h4>
                     <ul>
-                        <li><a href="/bedrift">For bedrifter</a></li>
-                        <li><a href="/api">API</a></li>
-                        <li><a href="/ai">AI-tjenester</a></li>
-                        <li><a href="/sikkerhet">Sikkerhet</a></li>
-                        <li><a href="/support">Kundeservice</a></li>
+                        <li><a href="#">Kundeservice</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Sikkerhet</a></li>
+                        <li><a href="#">Returpolicy</a></li>
                     </ul>
                 </div>
-
+                
                 <div class="footer-section">
-                    <h4>Om Raadi</h4>
+                    <h4>For bedrifter</h4>
                     <ul>
-                        <li><a href="/om">Om oss</a></li>
-                        <li><a href="/karriere">Karriere</a></li>
-                        <li><a href="/presse">Presse</a></li>
-                        <li><a href="/personvern">Personvern</a></li>
-                        <li><a href="/vilkar">Vilkår</a></li>
+                        <li><a href="#">Selg på Raadi</a></li>
+                        <li><a href="#">API dokumentasjon</a></li>
+                        <li><a href="#">Partnerskap</a></li>
+                        <li><a href="#">Annonsering</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Raadi AS. Alle rettigheter forbeholdt.</p>
-                <p>Drevet av AI-teknologi for trygg og smart handel.</p>
+                <p>&copy; 2025 Raadi. Alle rettigheter forbeholdt.</p>
+                <div class="footer-links">
+                    <a href="#">Personvern</a>
+                    <a href="#">Vilkår</a>
+                    <a href="#">Cookies</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="/static/js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

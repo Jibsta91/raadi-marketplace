@@ -3,51 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bla i annonser - Raadi Marketplace</title>
-    <link rel="stylesheet" href="static/css/style.css">
+    <title>Bla gjennom annonser - Raadi Enterprise Marketplace</title>
+    <meta name="description" content="Bla gjennom alle annonser på Raadi - Norges mest avanserte markedsplass med AI-drevne tjenester">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="container">
-            <div class="nav-brand">
-                <a href="/" class="logo">
-                    <i class="fas fa-store"></i>
-                    <span>Raadi</span>
-                </a>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1 class="logo-text">Raadi</h1>
+                <span class="logo-tagline">Enterprise Marketplace</span>
             </div>
             
             <nav class="nav-menu">
-                <ul>
-                    <li><a href="/">Hjem</a></li>
-                    <li><a href="/browse" class="active">Bla i annonser</a></li>
-                    <li><a href="/governance-dashboard.html">AI Governance</a></li>
-                </ul>
+                <a href="index.html" class="nav-link">Hjem</a>
+                <a href="browse.html" class="nav-link">Bla gjennom</a>
+                <a href="#categories" class="nav-link">Kategorier</a>
+                <a href="#about" class="nav-link">Om oss</a>
+                <a href="#contact" class="nav-link">Kontakt</a>
             </nav>
             
             <div class="nav-actions">
-                <button class="btn btn-outline">Logg inn</button>
-                <button class="btn btn-primary">Legg ut annonse</button>
+                <a href="login.html" class="btn-secondary">Logg inn</a>
+                <a href="register.html" class="btn-primary">Registrer deg</a>
             </div>
         </div>
     </header>
 
-    <!-- Browse Hero Section -->
-    <section class="browse-hero">
-        <div class="container">
-            <h1>Bla i alle annonser</h1>
-            <p>Finn det du leter etter blant tusenvis av annonser</p>
-            
-            <!-- Enhanced Search -->
-            <div class="search-container">
-                <form class="search-form">
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Search and Filter Section -->
+        <section class="search-filters">
+            <div class="container">
+                <div class="search-header">
+                    <h1>Bla gjennom annonser</h1>
+                    <p>Finn akkurat det du leter etter med våre avanserte søke- og filterfunksjoner</p>
+                </div>
+                
+                <div class="search-bar-extended">
                     <div class="search-input-group">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" class="search-input" placeholder="Hva leter du etter?">
+                        <input type="text" class="search-input-large" placeholder="Søk etter produkter, tjenester eller kategorier...">
+                        <button class="search-btn-large">🔍 Søk</button>
+                    </div>
+                    
+                    <div class="filter-bar">
+                        <select class="filter-select">
+                            <option value="">Alle kategorier</option>
+                            <option value="torget">Torget</option>
+                            <option value="jobb">Jobb</option>
+                            <option value="bil">Bil og campingvogn</option>
+                            <option value="eiendom">Eiendom</option>
+                            <option value="reise">Reise</option>
+                            <option value="bat">Båt</option>
+                            <option value="mc">MC</option>
+                            <option value="nyttekjoretoy">Nyttekjøretøy</option>
+                        </select>
+                        
+                        <select class="filter-select">
+                            <option value="">Prisklasse</option>
+                            <option value="0-1000">Under 1.000 kr</option>
+                            <option value="1000-5000">1.000 - 5.000 kr</option>
+                            <option value="5000-20000">5.000 - 20.000 kr</option>
+                            <option value="20000-100000">20.000 - 100.000 kr</option>
+                            <option value="100000+">Over 100.000 kr</option>
+                        </select>
+                        
+                        <select class="filter-select">
+                            <option value="">Lokasjon</option>
+                            <option value="oslo">Oslo</option>
+                            <option value="bergen">Bergen</option>
+                            <option value="trondheim">Trondheim</option>
+                            <option value="stavanger">Stavanger</option>
+                            <option value="drammen">Drammen</option>
+                        </select>
+                        
+                        <button class="filter-toggle">⚙️ Avanserte filtre</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="listings-section">
+            <div class="container">
+                <div class="results-header">
+                    <div class="results-info">
+                        <span class="results-count">Viser 1-20 av 1,247 annonser</span>
+                        <div class="sort-options">
+                            <label for="sort-select">Sorter etter:</label>
+                            <select id="sort-select" class="sort-select">
+                                <option value="relevance">Relevans</option>
+                                <option value="newest">Nyeste først</option>
+                                <option value="price-low">Lavest pris</option>
+                                <option value="price-high">Høyest pris</option>
+                                <option value="distance">Avstand</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">⊞ Rutenett</button>
+                        <button class="view-btn" data-view="list">☰ Liste</button>
+                    </div>
+                </div>
+
+                <!-- Listings Grid -->
+                <div class="listings-grid" id="listings-container">
+                    <!-- Listing Item 1 -->
+                    <article class="listing-card">
+                        <div class="listing-image">
+                            <img src="https://via.placeholder.com/300x200?text=iPhone+14+Pro" alt="iPhone 14 Pro">
+                            <div class="listing-badge">Fremhevet</div>
+                            <button class="favorite-btn" aria-label="Legg til favoritter">♡</button>
+                        </div>
+                        <div class="listing-content">
+                            <h3 class="listing-title">iPhone 14 Pro 256GB - Som ny</h3>
+                            <p class="listing-price">12.999 kr</p>
+                            <p class="listing-location">📍 Oslo, Norge</p>
+                            <p class="listing-description">Selger min iPhone 14 Pro i perfekt stand. Brukt kun i 3 måneder med skjermbeskytter hele tiden...</p>
+                            <div class="listing-meta">
+                                <span class="listing-date">2 timer siden</span>
+                                <span class="listing-views">👁 47 visninger</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Listing Item 2 -->
+                    <article class="listing-card">
+                        <div class="listing-image">
+                            <img src="https://via.placeholder.com/300x200?text=Toyota+Camry" alt="Toyota Camry">
+                            <button class="favorite-btn" aria-label="Legg til favoritter">♡</button>
+                        </div>
+                        <div class="listing-content">
+                            <h3 class="listing-title">Toyota Camry 2019 - Lav km</h3>
+                            <p class="listing-price">245.000 kr</p>
+                            <p class="listing-location">📍 Bergen, Norge</p>
+                            <p class="listing-description">Velholdt Toyota Camry med lav kilometer. Service er oppdatert og bilen er EU-godkjent...</p>
+                            <div class="listing-meta">
+                                <span class="listing-date">4 timer siden</span>
+                                <span class="listing-views">👁 123 visninger</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Listing Item 3 -->
+                    <article class="listing-card">
+                        <div class="listing-image">
+                            <img src="https://via.placeholder.com/300x200?text=Leilighet+Oslo" alt="Leilighet i Oslo">
+                            <div class="listing-badge">Ny annonse</div>
+                            <button class="favorite-btn" aria-label="Legg til favoritter">♡</button>
+                        </div>
+                        <div class="listing-content">
+                            <h3 class="listing-title">3-roms leilighet - Sentrum Oslo</h3>
+                            <p class="listing-price">4.200.000 kr</p>
+                            <p class="listing-location">📍 Oslo Sentrum, Norge</p>
+                            <p class="listing-description">Nydelig 3-roms leilighet i hjertet av Oslo. Oppusset i 2023 med moderne fasiliteter...</p>
+                            <div class="listing-meta">
+                                <span class="listing-date">1 time siden</span>
+                                <span class="listing-views">👁 89 visninger</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Listing Item 4 -->
+                    <article class="listing-card">
+                        <div class="listing-image">
+                            <img src="https://via.placeholder.com/300x200?text=MacBook+Pro" alt="MacBook Pro">
+                            <button class="favorite-btn" aria-label="Legg til favoritter">♡</button>
+                        </div>
+                        <div class="listing-content">
+                            <h3 class="listing-title">MacBook Pro M2 16" - 2023</h3>
+                            <p class="listing-price">28.500 kr</p>
+                            <p class="listing-location">📍 Trondheim, Norge</p>
+                            <p class="listing-description">MacBook Pro med M2-chip i utmerket stand. Perfekt for design og programmering...</p>
+                            <div class="listing-meta">
+                                <span class="listing-date">6 timer siden</span>
+                                <span class="listing-views">👁 67 visninger</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Listing Item 5 -->
+                    <article class="listing-card">
+                        <div class="listing-image">
+                            <img src="https://via.placeholder.com/300x200?text=Yamaha+R1" alt="Yamaha R1">
+                            <div class="listing-badge">Populær</div>
+                            <button class="favorite-btn" aria-label="Legg til favoritter">♡</button>
+                        </div>
+                        <div class="listing-content">
+                            <h3 class="listing-title">Yamaha R1 2020 - Sportssykkel</h3>
+                            <p class="listing-price">180.000 kr</p>
+                            <p class="listing-location">📍 Stavanger, Norge</p>
+                            <p class="listing-description">Yamaha R1 i perfekt stand. Lav kjørelengde og alltid garasjelagret...</p>
+                            <div class="listing-meta">
+                                <span class="listing-date">8 timer siden</span>
+                                <span class="listing-views">👁 234 visninger</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Listing Item 6 -->
+                    <article class="listing-card">
+                        <div class="listing-image">
+                            <img src="https://via.placeholder.com/300x200?text=Gaming+PC" alt="Gaming PC">
+                            <button class="favorite-btn" aria-label="Legg til favoritter">♡</button>
+                        </div>
+                        <div class="listing-content">
+                            <h3 class="listing-title">Gaming PC - RTX 4080 / i7-13700K</h3>
+                            <p class="listing-price">22.000 kr</p>
+                            <p class="listing-location">📍 Drammen, Norge</p>
+                            <p class="listing-description">Kraftig gaming PC bygget for 4K gaming. Inkluderer alle komponenter...</p>
+                            <div class="listing-meta">
+                                <span class="listing-date">12 timer siden</span>
+                                <span class="listing-views">👁 156 visninger</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-section">
+                    <button class="btn-primary btn-large" id="load-more-btn">Last inn flere annonser</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Recommendations -->
+        <section class="recommendations">
+            <div class="container">
+                <h2>AI-anbefalinger basert på din søkehistorikk</h2>
+                <div class="recommendations-grid">
+                    <div class="recommendation-card">
+                        <img src="https://via.placeholder.com/200x150?text=Tesla+Model+3" alt="Tesla Model 3">
+                        <h4>Tesla Model 3 2022</h4>
+                        <p class="rec-price">385.000 kr</p>
+                        <span class="rec-match">95% match</span>
+                    </div>
+                    <div class="recommendation-card">
+                        <img src="https://via.placeholder.com/200x150?text=iPad+Pro" alt="iPad Pro">
+                        <h4>iPad Pro 12.9" M2</h4>
+                        <p class="rec-price">8.999 kr</p>
+                        <span class="rec-match">88% match</span>
+                    </div>
+                    <div class="recommendation-card">
+                        <img src="https://via.placeholder.com/200x150?text=Hytte+Lillehammer" alt="Hytte">
+                        <h4>Hytte ved Lillehammer</h4>
+                        <p class="rec-price">2.100.000 kr</p>
+                        <span class="rec-match">82% match</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Raadi</h3>
+                    <p>Norges mest avanserte markedsplass med AI-drevne tjenester for trygg og effektiv handel.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Kategorier</h4>
+                    <ul>
+                        <li><a href="#torget">Torget</a></li>
+                        <li><a href="#jobb">Jobb</a></li>
+                        <li><a href="#bil">Bil og campingvogn</a></li>
+                        <li><a href="#eiendom">Eiendom</a></li>
+                        <li><a href="#reise">Reise</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>For bedrifter</h4>
+                    <ul>
+                        <li><a href="#enterprise">Enterprise-løsninger</a></li>
+                        <li><a href="#api">API-tilgang</a></li>
+                        <li><a href="#analytics">Avansert analyse</a></li>
+                        <li><a href="#support">Bedriftssupport</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#help">Hjelp og support</a></li>
+                        <li><a href="#safety">Sikkerhet</a></li>
+                        <li><a href="#terms">Vilkår</a></li>
+                        <li><a href="#privacy">Personvern</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Raadi Enterprise Marketplace. Alle rettigheter reservert.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Personvernerklæring</a>
+                    <a href="#terms">Brukervilkår</a>
+                    <a href="#cookies">Cookie-policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/browse.js"></script>
+</body>
+</html>
                         <button type="submit" class="search-btn">
                             <i class="fas fa-search"></i>
                             Søk

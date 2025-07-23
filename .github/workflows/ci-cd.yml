@@ -46,16 +46,20 @@ jobs:
         pip install bandit safety semgrep pip-audit
 
     - name: Run security audit with safety
-      run: safety check --json --output safety-report.json || true
+      run: |
+        safety check --json --output safety-report.json || echo '{"errors": ["Safety check failed"]}' > safety-report.json
 
     - name: Run security audit with bandit
-      run: bandit -r app/ -f json -o bandit-report.json || true
+      run: |
+        bandit -r app/ -f json -o bandit-report.json || echo '{"errors": ["Bandit scan failed"]}' > bandit-report.json
 
     - name: Run dependency audit with pip-audit
-      run: pip-audit --format=json --output=pip-audit-report.json || true
+      run: |
+        pip-audit --format=json --output=pip-audit-report.json || echo '{"errors": ["Pip-audit failed"]}' > pip-audit-report.json
 
     - name: Run SAST with Semgrep
-      run: semgrep --config=auto --json --output=semgrep-report.json app/ || true
+      run: |
+        semgrep --config=auto --json --output=semgrep-report.json app/ || echo '{"errors": ["Semgrep scan failed"]}' > semgrep-report.json
 
     - name: Run custom security audit
       run: python security_audit.py
@@ -70,6 +74,7 @@ jobs:
           bandit-report.json
           pip-audit-report.json
           semgrep-report.json
+        if-no-files-found: warn
 
   # Unit Tests
   test:

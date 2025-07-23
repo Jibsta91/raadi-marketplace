@@ -4,18 +4,21 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  tags = {
+  tags = merge(local.common_tags, {
     Name = "${var.app_name}-vpc"
-  }
+    "ai:governance:network-type" = "production-vpc"
+    "ai:security:isolation" = "enabled"
+  })
 }
 
 # Internet Gateway
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
-  tags = {
-    Name = "${var.app_name}-igw"
-  }
+  tags = merge(local.common_tags, {
+    Name = "${local.app_name}-igw"
+    "ai:governance:network-component" = "internet-gateway"
+  })
 }
 
 # Public Subnets

@@ -17,10 +17,13 @@ terraform {
     }
   }
 
-  # Terraform Cloud configuration  
+  # Terraform Cloud configuration
   cloud {
+    organization = "raadi-marketplace"
+    
     workspaces {
-      tags = ["raadi-marketplace"]
+      project = "prj-CPNeHfFfgeyMqGGG"
+      name    = "ws-MYEXTVRn8FhGXQjS"
     }
   }
 }

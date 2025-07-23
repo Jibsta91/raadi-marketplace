@@ -1,5 +1,5 @@
 from pydantic_settings import BaseSettings
-from typing import Optional
+from typing import Optional, List
 
 
 class Settings(BaseSettings):
@@ -48,10 +48,10 @@ class Settings(BaseSettings):
     RATE_LIMIT_WINDOW: int = 60  # seconds
     
     # CORS settings
-    CORS_ORIGINS: list = ["http://localhost", "http://localhost:3000"]
+    CORS_ORIGINS: List[str] = ["http://localhost", "http://localhost:3000"]
     
     # Norwegian marketplace categories
-    MARKETPLACE_CATEGORIES = [
+    MARKETPLACE_CATEGORIES: List[str] = [
         "torget",
         "jobb",
         "bil-og-campingvogn",

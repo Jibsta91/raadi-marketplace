@@ -1,0 +1,127 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name for the release'
+        required: true
+        default: 'v18'
+      release_name:
+        description: 'Release name'
+        required: true
+        default: 'Release v18'
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get commit info
+        id: commit
+        run: |
+          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.tag_name || 'v18' }}
+          release_name: ${{ github.event.inputs.release_name || 'Release v18' }}
+          body: |
+            ## Raadi Marketplace Release v18
+            
+            **Changes in this release:**
+            Fix static files and complete marketplace rebuild
+            
+            ### 🚀 New Features & Improvements
+            - Fixed empty index.html file issue during Docker rebuild
+            - Updated comprehensive marketplace frontend with all features
+            - Enhanced browse.js with full interactive functionality
+            - Improved CSS styling and responsive design
+            - All services operational and frontend fully connected to backend
+            - Marketplace now fully functional at localhost:8000
+            
+            ### 🐳 Docker Images
+            ```
+            675080425974.dkr.ecr.us-east-1.amazonaws.com/raadi-marketplace:main
+            675080425974.dkr.ecr.us-east-1.amazonaws.com/raadi-marketplace:latest
+            675080425974.dkr.ecr.us-east-1.amazonaws.com/raadi-marketplace:main-${{ steps.commit.outputs.short_sha }}
+            ```
+            
+            ### 📋 Technical Details
+            - **Commit:** ${{ steps.commit.outputs.sha }}
+            - **AWS Region:** us-east-1
+            - **ECS Cluster:** raadi-marketplace-cluster
+            - **ECS Service:** raadi-marketplace-service
+            - **Python Version:** 3.11
+            
+            ### 🏗️ Infrastructure
+            - Complete AWS ECS Fargate deployment
+            - Terraform-managed infrastructure
+            - Docker containerized application
+            - CI/CD pipeline with GitHub Actions
+            
+            ### 🔧 Services
+            - FastAPI web application
+            - PostgreSQL database
+            - Redis cache
+            - Elasticsearch search
+            - AI services (governance, cybersecurity, infrastructure, data management)
+            - Nginx reverse proxy
+            
+            **Full Changelog:** https://github.com/Jibsta91/raadi-marketplace/compare/v17...v18
+          draft: false
+          prerelease: false
+
+  deploy-to-aws:
+    needs: create-release
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: raadi-marketplace
+          IMAGE_TAG: ${{ github.event.inputs.tag_name || 'v18' }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service \
+            --cluster raadi-marketplace-cluster \
+            --service raadi-marketplace-service \
+            --force-new-deployment \
+            --region us-east-1
